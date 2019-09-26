@@ -10,8 +10,8 @@
 import AppKit
 
 public extension MarkdownParser {
-  public static let defaultFont = NSFont.systemFont(ofSize: NSFont.smallSystemFontSize)
-  public static let defaultColor = NSColor.black
+  static let defaultFont = NSFont.systemFont(ofSize: NSFont.smallSystemFontSize)
+  static let defaultColor = NSColor.black
 }
 
 #endif

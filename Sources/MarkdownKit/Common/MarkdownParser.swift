@@ -70,7 +70,7 @@ open class MarkdownParser {
   }
 
   public let font: MarkdownFont
-  public let color: MarkdownColor
+  public let color: MarkdownColor?
   
   // MARK: Legacy Initializer
   @available(*, deprecated, renamed: "init", message: "This constructor will be removed soon, please use the new opions constructor")
@@ -83,7 +83,7 @@ open class MarkdownParser {
   
   // MARK: Initializer
   public init(font: MarkdownFont = MarkdownParser.defaultFont,
-              color: MarkdownColor = MarkdownParser.defaultColor,
+              color: MarkdownColor? = nil,
               enabledElements: EnabledElements = .all,
               customElements: [MarkdownElement] = []) {
     self.font = font
@@ -128,8 +128,10 @@ open class MarkdownParser {
     let attributedString = NSMutableAttributedString(attributedString: markdown)
     attributedString.addAttribute(.font, value: font,
                                   range: NSRange(location: 0, length: attributedString.length))
-    attributedString.addAttribute(.foregroundColor, value: color,
-                                  range: NSRange(location: 0, length: attributedString.length))
+    if let color = color {
+        attributedString.addAttribute(.foregroundColor, value: color,
+                                      range: NSRange(location: 0, length: attributedString.length))
+    }
     var elements: [MarkdownElement] = escapingElements
     elements.append(contentsOf: defaultElements)
     elements.append(contentsOf: customElements)
